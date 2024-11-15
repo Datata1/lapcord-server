@@ -3,7 +3,11 @@ import { TextDocument } from 'vscode-languageserver-textdocument'
 import { Server } from './lsp-server'
 
 export function createConnection() {
-  const connection = createServerConnection(ProposedFeatures.all)
+  const connection = createServerConnection(ProposedFeatures.all, {
+    input: process.stdin,
+    output: process.stdout,
+  });
+
   const documents = new TextDocuments(TextDocument)
   const server = new Server(connection)
 
